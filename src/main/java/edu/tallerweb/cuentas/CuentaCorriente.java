@@ -27,8 +27,7 @@ public class CuentaCorriente {
 	private Double descubiertoTotal = 0.0;
 	private Double descubierto = 0.0;
 	private Double monto = 0.0;
-	private Double recargoDescubierto = 1.05;
-	
+
 	public CuentaCorriente(final Double descubiertoTotal) {
 		if (descubiertoTotal < 0) {
 			throw new CuentaBancariaException("El DescubiertoLimite debe ser mayor a 0 (CERO)");
@@ -44,7 +43,7 @@ public class CuentaCorriente {
 	 * @param monto a depositar
 	 */
 	public void depositar(final Double monto) {
-		if (monto < 0) {
+		if (this.monto < 0) {
 			throw new CuentaBancariaException("No se puede depositar monto negativo");
 		}
 
@@ -80,7 +79,7 @@ public class CuentaCorriente {
 	 * @param monto a extraer
 	 */
 	public void extraer(final Double monto) {
-		if (monto < 0) {
+		if (this.monto < 0) {
 			throw new CuentaBancariaException("No se puede extraer monto negativo");
 		}
 
@@ -92,7 +91,8 @@ public class CuentaCorriente {
 		}
 
 		if (this.saldo < this.monto) {
-
+			
+			final Double recargoDescubierto = 1.05;
 			this.monto -= this.saldo;
 			this.saldo = 0.0;
 			this.descubierto -= this.monto * recargoDescubierto;

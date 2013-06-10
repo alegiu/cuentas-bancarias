@@ -12,12 +12,9 @@ public class CajaAhorros {
 	 * @param monto a depositar
 	 */
 	private Double saldo = 0.0;
-	private Double seis = 6.0;
 	private Integer cantidadDeExtracciones = 0;
-	private Integer cinco = 5;
-	private Integer limiteDeExtraccionesGratis = cinco;
 	private Double adicionalPorExtraccion = 0.0;
-	
+
 	public void depositar(final Double monto) {
 		this.saldo += monto;
 //		throw new RuntimeException("No implementado aún");
@@ -29,15 +26,17 @@ public class CajaAhorros {
 	 * @param monto a extraer
 	 */
 	public void extraer(final Double monto) {
+		final Double seis = 6.0;
+		final Integer limiteDeExtraccionesGratis = 5;
 		cantidadDeExtracciones += 1;
-		if (this.cantidadDeExtracciones > this.limiteDeExtraccionesGratis) {
+		if (this.cantidadDeExtracciones > limiteDeExtraccionesGratis) {
 			this.adicionalPorExtraccion = seis;
 		}
-		
+
 		if ((this.saldo - this.adicionalPorExtraccion) < monto) {
 			throw new CuentaBancariaException("Saldo insuficiente para realizar esta extraccion");
 		}
-		
+
 		this.saldo -= monto + this.adicionalPorExtraccion;
 //		throw new RuntimeException("No implementado aún");
 	}
