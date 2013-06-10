@@ -7,7 +7,7 @@ package edu.tallerweb.cuentas;
  * correctamente.
  */
 public class CuentaSueldo {
-	
+
 	private Double saldo = 0.0;
 
 	/**
@@ -15,7 +15,7 @@ public class CuentaSueldo {
 	 * @param monto a depositar
 	 */
 	public void depositar(final Double monto) {
-		
+
 		if (monto < 0) {
 			throw new CuentaBancariaException("No se puede depositar monto negativo");
 		}
@@ -31,9 +31,9 @@ public class CuentaSueldo {
 		if (monto < 0) {
 			throw new CuentaBancariaException("No se puede extraer monto negativo");
 		}
-		
-		if(this.saldo < monto) {
-			
+
+		if (this.saldo < monto) {
+
 			throw new CuentaBancariaException("Su Saldo insuficiente para realizar esta extraccion");
 
 		}

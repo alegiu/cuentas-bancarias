@@ -11,11 +11,12 @@ public class CajaAhorros {
 	 * No hay reglas adicionales para el depósito
 	 * @param monto a depositar
 	 */
-	
 	private Double saldo = 0.0;
+	private Double seis = 6.0;
 	private Integer cantidadDeExtracciones = 0;
-	private Integer limiteDeExtraccionesGratis = 5;
-	private Double adicionalPorExtraccion= 0.0;
+	private Integer cinco = 5;
+	private Integer limiteDeExtraccionesGratis = cinco;
+	private Double adicionalPorExtraccion = 0.0;
 	
 	public void depositar(final Double monto) {
 		this.saldo += monto;
@@ -29,18 +30,15 @@ public class CajaAhorros {
 	 */
 	public void extraer(final Double monto) {
 		cantidadDeExtracciones += 1;
-		if(this.cantidadDeExtracciones > this.limiteDeExtraccionesGratis) {
-			this.adicionalPorExtraccion = 6.0;
-
+		if (this.cantidadDeExtracciones > this.limiteDeExtraccionesGratis) {
+			this.adicionalPorExtraccion = seis;
 		}
 		
-		if((this.saldo - this.adicionalPorExtraccion) < monto) {
+		if ((this.saldo - this.adicionalPorExtraccion) < monto) {
 			throw new CuentaBancariaException("Saldo insuficiente para realizar esta extraccion");
-			
 		}
 		
 		this.saldo -= monto + this.adicionalPorExtraccion;
-		
 //		throw new RuntimeException("No implementado aún");
 	}
 

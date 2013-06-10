@@ -23,21 +23,20 @@ public class CuentaCorriente {
 	 * para el descubierto.
 	 * @param descubiertoTotal
 	 */
-	
 	private Double saldo = 0.0;
 	private Double descubiertoTotal = 0.0;
 	private Double descubierto = 0.0;
 	private Double monto = 0.0;
+	private Double recargoDescubierto = 1.05;
 	
 	public CuentaCorriente(final Double descubiertoTotal) {
-		if(descubiertoTotal < 0) {
+		if (descubiertoTotal < 0) {
 			throw new CuentaBancariaException("El DescubiertoLimite debe ser mayor a 0 (CERO)");
 		}
 
 		this.descubiertoTotal = descubiertoTotal;
 		this.descubierto = descubiertoTotal;
 	}
-	
 	/**
 	 * Todo depósito deberá cubrir primero el descubierto,
 	 * si lo hubiera, y luego contar para el saldo de la
@@ -51,19 +50,19 @@ public class CuentaCorriente {
 
 		this.monto = monto;
 
-		if((this.descubiertoTotal - this.descubierto) == 0) {
+		if ((this.descubiertoTotal - this.descubierto) == 0) {
 
 			this.saldo += this.monto;
 
-		}else {
+		} else {
 
-			if((this.descubiertoTotal - this.descubierto) < this.monto) {
+			if ((this.descubiertoTotal - this.descubierto) < this.monto) {
 
 				this.monto -= (this.descubiertoTotal - this.descubierto);
 				this.descubierto = this.descubiertoTotal;
 				this.saldo += this.monto;
 
-			}else {
+			} else {
 
 				this.descubierto += this.monto;
 
@@ -87,18 +86,18 @@ public class CuentaCorriente {
 
 		this.monto = monto;
 
-		if((this.saldo + this.descubierto)< this.monto) {
+		if ((this.saldo + this.descubierto) < this.monto) {
 
 			throw new CuentaBancariaException("Saldo insuficiente para realizar esta extraccion");
 		}
 
-		if(this.saldo < this.monto) {
+		if (this.saldo < this.monto) {
 
 			this.monto -= this.saldo;
 			this.saldo = 0.0;
-			this.descubierto -= this.monto * 1.05;
+			this.descubierto -= this.monto * recargoDescubierto;
 
-		}else {
+		} else {
 
 			this.saldo -= this.monto;
 		}
@@ -111,7 +110,6 @@ public class CuentaCorriente {
 	public Double getSaldo() {
 		return this.saldo;
 	}
-	
 	/**
 	 * Permite saber el saldo en descubierto
 	 * @return el descubierto de la cuenta
