@@ -7,13 +7,20 @@ package edu.tallerweb.cuentas;
  * correctamente.
  */
 public class CuentaSueldo {
+	
+	private Double saldo = 0.0;
 
 	/**
 	 * No hay reglas adicionales para el depósito
 	 * @param monto a depositar
 	 */
 	public void depositar(final Double monto) {
-		throw new RuntimeException("No implementado aún");
+		
+		if (monto < 0) {
+			throw new CuentaBancariaException("No se puede depositar monto negativo");
+		}
+
+		this.saldo += monto;
 	}
 
 	/**
@@ -21,7 +28,17 @@ public class CuentaSueldo {
 	 * @param monto a extraer
 	 */
 	public void extraer(final Double monto) {
-		throw new RuntimeException("No implementado aún");
+		if (monto < 0) {
+			throw new CuentaBancariaException("No se puede extraer monto negativo");
+		}
+		
+		if(this.saldo < monto) {
+			
+			throw new CuentaBancariaException("Su Saldo insuficiente para realizar esta extraccion");
+
+		}
+
+		this.saldo -= monto;
 	}
 
 	/**
@@ -29,7 +46,8 @@ public class CuentaSueldo {
 	 * @return el saldo de la cuenta
 	 */
 	public Double getSaldo() {
-		throw new RuntimeException("No implementado aún");
+		return this.saldo;
+//		throw new RuntimeException("No implementado aún");
 	}
 
 }
